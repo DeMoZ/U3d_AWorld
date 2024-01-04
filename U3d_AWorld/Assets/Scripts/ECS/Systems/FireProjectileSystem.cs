@@ -7,9 +7,18 @@ using Unity.Transforms;
 [UpdateBefore(typeof(TransformSystemGroup))]
 public partial struct FireProjectileSystem : ISystem
 {
+    private bool _isEnabled;
+    
+    public void OnCreate(ref SystemState state)
+    {
+        _isEnabled = true;
+    }
+    
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
+        if (!_isEnabled) return;
+        
         var ecb = new EntityCommandBuffer(Allocator.Temp);
         foreach (var (projectilePrefab, transform) in SystemAPI.Query<ProjectilePrefab, LocalTransform>()
                      .WithAll<FireProjectileTag>())

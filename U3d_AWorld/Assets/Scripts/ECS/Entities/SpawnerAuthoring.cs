@@ -50,7 +50,6 @@ public struct PlayerSpawner : IComponentData
 {
     public Entity playerPrefab;
     public float3 spawnPoint;
-    public bool isSpawned;
 }
 
 public struct BotSpawner : IComponentData

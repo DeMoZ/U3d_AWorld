@@ -5,12 +5,15 @@ using Unity.Transforms;
 using Random = Unity.Mathematics.Random;
 
 [BurstCompile]
-public partial struct OptimizedSpawnerSystem : ISystem
+public partial struct SpawnBotSystem : ISystem
 {
+    private bool _isEnabled;
+
     private Random _random;
     public void OnCreate(ref SystemState state)
     {
-       
+        _isEnabled = true;
+        
         state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
         _random = new Random((uint)System.DateTime.Now.Millisecond);
         //_random = new Random(12345);
@@ -21,9 +24,11 @@ public partial struct OptimizedSpawnerSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
+        if (!_isEnabled) return;
+        
         var ecb = GetEntityCommandBuffer(ref state);
         // Creates a new instance of the job, assigns the necessary data, and schedules the job in parallel.
-        new ProcessSpawnerJob
+        new ProcessBotSpawnerJob
         {
             ecb = ecb,
             elapsedTime = SystemAPI.Time.ElapsedTime,
@@ -40,7 +45,7 @@ public partial struct OptimizedSpawnerSystem : ISystem
 }
 
 [BurstCompile]
-public partial struct ProcessSpawnerJob : IJobEntity
+public partial struct ProcessBotSpawnerJob : IJobEntity
 {
     public EntityCommandBuffer.ParallelWriter ecb;
     public double elapsedTime;
