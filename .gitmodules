@@ -1,0 +1,3 @@
+[submodule "U3d_AWorld/Assets/SimpleMaterials"]
+	path = U3d_AWorld/Assets/SimpleMaterials
+	url = git@github.com:DeMoZ/U3d_SimpleMaterials.git
