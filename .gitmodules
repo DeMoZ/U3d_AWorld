@@ -1,3 +1,6 @@
-[submodule "U3d_AWorld/Assets/SimpleMaterials"]
+[submodule "U3d_SimpleMaterials"]
 	path = U3d_AWorld/Assets/SimpleMaterials
 	url = git@github.com:DeMoZ/U3d_SimpleMaterials.git
+[submodule "U3d_UnityTools"]
+	path = U3d_AWorld/Assets/UnityTools
+	url = git@github.com:DeMoZ/U3d_UnityTools.git
